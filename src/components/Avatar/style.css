@@ -1,0 +1,14 @@
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+.default-avatar {
+    background-color: rgb(240, 247, 255);
+    color: #3690ec;
+    width: 64px;
+    height: 64px;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
