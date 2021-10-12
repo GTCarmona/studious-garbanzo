@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import './style.css'
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import api from "../../services/api";
 
-export default function AddContactModal({show, handleClose, orgs, customFields, updateContactList}) {
+export default function AddContactModal({show, handleClose, orgs, customFields}) {
   const groupKey = customFields.find(item => item.name === "Groups").key
   const assistantKey = customFields.find(item => item.name === "Assistant").key
   const [formData, setFormData] = useState({
@@ -14,8 +16,9 @@ export default function AddContactModal({show, handleClose, orgs, customFields, 
     org_id: 0,
     [groupKey] : "",
     [assistantKey]: ""
-
   })
+  const [showAlert, setShowAlert] = useState(false);
+
 
   const handleEmailAndPhone = (e) => {
     setFormData({
@@ -31,10 +34,19 @@ export default function AddContactModal({show, handleClose, orgs, customFields, 
   const handleSubmit = () => {
     console.log("formData", formData)
     api.addContact(formData)
-      .then(response => updateContactList(response.data))
+      .then(response => {
+        handleClose();
+        triggerAlert();
+      })
       .catch(error =>console.error(error))
       }
 
+      const triggerAlert = () => {
+        setShowAlert(true)
+        setTimeout(() => {
+          setShowAlert(false)
+        }, 4000);
+      }
     return (
       <>
         <Modal show={show} onHide={handleClose}>
@@ -71,12 +83,12 @@ export default function AddContactModal({show, handleClose, orgs, customFields, 
               <Form.Group
                 className="mb-3">
                 <Form.Label>Assistant</Form.Label>
-                <Form.Control type="text" placeholder="Assistant's Name" name={groupKey} />
+                <Form.Control type="text" placeholder="Assistant's Name" name={groupKey} onChange={handleChange} />
               </Form.Group>
               <Form.Group
                 className="mb-3">
                 <Form.Label>Groups</Form.Label>
-                <Form.Control type="text" placeholder="Group Name" name={assistantKey}/>
+                <Form.Control type="text" placeholder="Group Name" name={assistantKey} onChange={handleChange} />
               </Form.Group>
               <Form.Group
                 className="mb-3">
@@ -86,14 +98,19 @@ export default function AddContactModal({show, handleClose, orgs, customFields, 
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <button className="btn btn-outline-secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose}>
               Close
-            </button>
-            <button className="btn btn-primary primary-button" type="submit"  onClick={handleSubmit}>
+            </Button>
+            <Button variant="primary"  onClick={handleSubmit}>
               Add
-            </button>
+            </Button>
           </Modal.Footer>
         </Modal>
+        {showAlert && 
+        <Alert className="alert" variant="success" onClose={() => setShowAlert(false)} dismissible>
+         {formData.name} was created successfully!
+        </Alert>
+      }
       </>
     );
 }

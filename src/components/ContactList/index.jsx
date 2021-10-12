@@ -12,16 +12,8 @@ export default function ContactList() {
     const [showForm, setShowForm] = useState(false);
     const [customFields, setCustomFields] = useState([]);
 
-    const removeFromContactList = (id) => {
-        const newContactsList = contacts.filter((contact) =>  contact.id === id)
-        setContacts(newContactsList);
-    }
-    const updateContactList = (data) => {
-    console.log("🚀 ~ file: index.jsx ~ line 20 ~ updateContactList ~ data", data)
-        const updatedContacts = contacts.unshift(data)
-        setContacts(updatedContacts);
 
-    }
+
     const fetchContacts = async () => {
         const contactsResponse = await api.getContacts(); 
         const contactFields = await api.getContactFields(); 
@@ -75,8 +67,13 @@ export default function ContactList() {
 
     useEffect(() => {
         fetchContacts()
+    }, [contacts])
+    
+    useEffect(() => {
         fetchOrgs();
     }, [])
+
+    console.log("contacts", contacts)
     return (
         <div className="main">
             <DragDropContext onDragEnd={onDragEnd}>
@@ -99,7 +96,7 @@ export default function ContactList() {
                                         ref={provided.innerRef} 
                                             {...provided.draggableProps} 
                                             {...provided.dragHandleProps}>
-                                        <ContactCard contact={item} removeFromContactList={removeFromContactList} />
+                                        <ContactCard contact={item} />
                                         </div>)}
                             </Draggable>
                             ))
@@ -111,7 +108,6 @@ export default function ContactList() {
                 orgs={orgs} 
                 show={showForm} 
                 handleClose={toggleShowForm} 
-                updateContactList={updateContactList}
                 customFields={customFields} />}
         </div>
     )

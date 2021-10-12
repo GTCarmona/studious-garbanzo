@@ -18,7 +18,7 @@ export default function ContactCard(props) {
         <>
         <div>
         <div className="card d-flex justify-content-between" onClick={openModal}>
-            <div>
+            <div className="d-flex flex-column justify-content-between">
                 <p className="card_title">{contact.first_name} {contact.last_name}</p>
                 <p className="card_subtitle">{contact.org_name}</p>
             </div>
@@ -26,7 +26,7 @@ export default function ContactCard(props) {
                 <Avatar contact={contact}/>
             </div>
         </div>
-        <RemoveContact contact={contact} removeFromContactList={props.removeFromContactList}/>
+        <RemoveContact contact={contact} />
         </div>
 
             {showModal && 

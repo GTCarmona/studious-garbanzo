@@ -6,6 +6,9 @@
 .primary-color {
   color: var(--primary);
 }
+p {
+  margin-bottom: 0;
+}
 .btn-primary {
   color: #fff;
   border-radius: 2px;
@@ -34,4 +37,10 @@
 .modal-footer,
 .modal-header {
   background-color: #f0f0f0;
+}
+.alert {
+  position: fixed;
+  bottom: 2vh;
+  right: 3vw;
+  z-index: 1000;
 }
