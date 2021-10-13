@@ -7,5 +7,23 @@
 .card-wrapper {
   padding: 10px 20px;
 }
+.search-input {
+  border-radius: 32px;
+  border: none;
+  background-color: rgb(240, 240, 240);
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+.search-input input{
+  background: none;
+  border: none;
+  color: rgb(108 102 102);
+  outline: none;
+  margin-left: 15px;
+}
+.search-input input::placeholder{
+  color: rgb(108 102 102);
+}
   
   

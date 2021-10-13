@@ -4,8 +4,7 @@ import './style.css'
 import Avatar from '../Avatar'
 import RemoveContact from '../RemoveContact';
 
-export default function ContactCard(props) {
-    const contact = props.contact;
+export default function ContactCard({contact, removeFromContactList}) {
     const [showModal, setShowModal] = useState(false);
     
     const closeModal = () => {
@@ -26,14 +25,14 @@ export default function ContactCard(props) {
                 <Avatar contact={contact}/>
             </div>
         </div>
-        <RemoveContact contact={contact} />
+        <RemoveContact contact={contact} removeFromContactList={removeFromContactList} />
         </div>
 
             {showModal && 
                 <ContactDetail 
                         show={showModal} 
                         handleClose={closeModal} 
-                        contact={props.contact}/>}
+                        contact={contact}/>}
             </>
     )
 }

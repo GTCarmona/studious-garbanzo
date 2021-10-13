@@ -6,9 +6,9 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import api from "../../services/api";
 
-export default function AddContactModal({show, handleClose, orgs, customFields}) {
-  const groupKey = customFields.find(item => item.name === "Groups").key
-  const assistantKey = customFields.find(item => item.name === "Assistant").key
+export default function AddContactModal({show, handleClose, orgs, contactFields, updateContactList}) {
+  const groupKey = contactFields.find(item => item.name === "Groups").key
+  const assistantKey = contactFields.find(item => item.name === "Assistant").key
   const [formData, setFormData] = useState({
     name: '',
     phone: [],
@@ -32,9 +32,9 @@ export default function AddContactModal({show, handleClose, orgs, customFields})
       [e.target.name]: e.target.value })
   }
   const handleSubmit = () => {
-    console.log("formData", formData)
     api.addContact(formData)
       .then(response => {
+        updateContactList(response.data)
         handleClose();
         triggerAlert();
       })

@@ -5,7 +5,7 @@ import Alert from 'react-bootstrap/Alert';
 import api from "../../services/api";
 import './style.css';
 
-export default function RemoveContact({contact}) {
+export default function RemoveContact({contact, removeFromContactList}) {
     const [show, setShow] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [deletedName, setDeletedName] = useState("")
@@ -14,7 +14,8 @@ export default function RemoveContact({contact}) {
     const handleShow = () => setShow(true);
     const handleRemoval = () => {
         api.removeContact(contact.id)
-            .then((data) => {
+            .then((response) => {
+              removeFromContactList(response.data.id)
                 setShow(false);
                 triggerAlert(contact)
             })

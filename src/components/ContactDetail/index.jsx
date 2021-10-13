@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 export default function ContactDetail({ contact, show, handleClose }) {
+  console.log("🚀 ~ file: index.jsx ~ line 11 ~ ContactDetail ~ contact", contact)
   const location = contact.Country ? 
     (contact['City/town/village/locality'] || contact['State/county']) + ", " + contact.Country 
     :
