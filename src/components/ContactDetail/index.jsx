@@ -8,7 +8,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 export default function ContactDetail({ contact, show, handleClose }) {
-  console.log("🚀 ~ file: index.jsx ~ line 11 ~ ContactDetail ~ contact", contact)
   const location = contact.Country ? 
     (contact['City/town/village/locality'] || contact['State/county']) + ", " + contact.Country 
     :
@@ -72,7 +71,7 @@ export default function ContactDetail({ contact, show, handleClose }) {
                 <Form.Control
                   plaintext
                   readOnly
-                  defaultValue={contact.name}
+                  defaultValue={contact.Assistant}
                 />
               </Col>
             </Form.Group>
@@ -113,9 +112,6 @@ export default function ContactDetail({ contact, show, handleClose }) {
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>

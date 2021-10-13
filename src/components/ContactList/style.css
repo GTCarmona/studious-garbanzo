@@ -21,6 +21,7 @@
   color: rgb(108 102 102);
   outline: none;
   margin-left: 15px;
+  width: 100%;
 }
 .search-input input::placeholder{
   color: rgb(108 102 102);

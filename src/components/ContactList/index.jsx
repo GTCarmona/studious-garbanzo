@@ -19,6 +19,7 @@ export default function ContactList() {
     const removeFromContactList = (id) => {
         const newContactsList = contacts.filter((contact) =>  contact.id !== id)
         setContacts(newContactsList);
+        setFilteredContacts(newContactsList);
     };
     /* Update contact list after creating a new contact, and puts the new contact as first of list */
     const updateContactList = (data) => {
@@ -26,6 +27,7 @@ export default function ContactList() {
         updatedContacts.unshift(data)
         const mappedContacts = mapFields(updatedContacts, contactFields)
         setContacts(mappedContacts);
+        setFilteredContacts(mappedContacts)
 
     };
     /* Retrieve orgs data for selection when creating a new contact */
@@ -113,9 +115,9 @@ export default function ContactList() {
             <DragDropContext onDragEnd={onDragEnd}>
                 <h1 className="mt-4">Peoples List</h1>
                 <div className="d-flex flex-wrap justify-content-between pt-4">
-                    <div class="search-input col-md-4 col-12 mb-3">
+                    <div className="search-input col-md-4 col-12 mb-3">
                         <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="darkslategray" class="bi bi-search" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="darkslategray" className="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                             </svg>
                         </span>
